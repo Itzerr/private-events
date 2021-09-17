@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+@import url(https://cdn.jsdelivr.net/npm/modern-normalize@1.1.0/modern-normalize.min.css);
+
+$primary-color: #9C27B0;
+$primary-color-dark: darken($primary-color, 10%);
+$primary-color-light: lighten($primary-color, 10%);
+
+$white: hsl(0, 0%, 95%);
+$black: hsl(0, 0%, 20%);
+
+
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+}
