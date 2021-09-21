@@ -1,6 +1,10 @@
-<h1>Editing Event</h1>
+<section class="edit-event">
+  <h2>Editing Event</h2>
 
-<%= render 'form', event: @event %>
+  <%= render 'form', event: @event %>
 
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+  <section class="links">
+    <%= link_to 'Show', @event %>
+    <%= link_to 'Back', events_path %>
+  </section>
+<section>

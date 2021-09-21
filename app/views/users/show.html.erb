@@ -1,10 +1,28 @@
-<h2><%= @user.username %></h2>
-<h3>Events:</h3>
-<% @user.events.each do |event| %>
-  <section>
-    <p><strong>Event</strong>: <%= event.name %></p>
-    <p><strong>Desc</strong>: <%= event.desc %></p>
-    <p><strong>Date</strong>: <%= event.date %></p>
+<section class="column normal-gap">
+  <h2><%= @user.username %></h2>
+  <section class="row normal-gap">
+    <section class="card column small-gap">
+      <h3>Created Events:</h3>
+      <% @user.events.each do |event| %>
+        <section>
+          <p><%= link_to event.name, event_path(event) %></p>
+        </section>
+      <% end %>
+    </section>
+    <section class="card column small-gap">
+      <h3>Attended Events:</h3>
+      <h4>Upcoming Events:</h4>
+      <% @user.attended_events.upcoming.each do |event| %>
+        <section>
+          <p><%= link_to event.name, event_path(event) %></p>
+        </section>
+      <% end %>
+      <h4>Past Events:</h4>
+      <% @user.attended_events.past.each do |event| %>
+        <section>
+          <p><%= link_to event.name, event_path(event) %></p>
+        </section>
+      <% end %>
+    </section>
   </section>
-  <hr>
-<% end %>
+</section>

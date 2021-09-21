@@ -1,19 +1,52 @@
-<p id="notice"><%= notice %></p>
+<section>
+  <p>
+    <strong>Name:</strong>
+    <%= @event.name %>
+  </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @event.name %>
-</p>
+  <p>
+    <strong>Desc:</strong>
+    <%= @event.desc %>
+  </p>
 
-<p>
-  <strong>Desc:</strong>
-  <%= @event.desc %>
-</p>
+  <p>
+    <strong>Date:</strong>
+    <%= @event.date %>
+  </p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @event.date %>
-</p>
+  <p>
+    <strong>Creator:</strong>
+    <%= link_to @event.creator.username, user_path(@event.creator) %>
+  </p>
 
-<%= link_to 'Edit', edit_event_path(@event) %> |
-<%= link_to 'Back', events_path %>
+  <p>
+    <strong>Attendees:</strong>
+    <% if @event.attendees.size == 0 %>
+      None
+    <% else %>
+      <% @event.attendees.each do |user| %>
+        <%= link_to user.username, user_path(user) %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <hr>
+
+  <section class="links">
+    <% if user_signed_in? %>
+      <% if current_user == @event.creator %>
+        <%= link_to 'Edit', edit_event_path(@event) %>
+        <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% else %>
+        <% if current_user.attended_events.exists?(@event.id) %>
+          <%= link_to 'Dont Attend', event_attendance_path(id: current_user.event_attendances.find_by(event_id: @event.id).id), method: :delete %>
+        <% else %>
+          <%= link_to 'Attend', event_attendances_path(event_attendance: {event_id: @event.id}), method: :post %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to 'Log In to attend event', new_user_session_path %>
+    <% end %>
+    <%= link_to 'Back', :back %>
+  </section>
+<section>

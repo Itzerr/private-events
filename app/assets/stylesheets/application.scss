@@ -29,3 +29,91 @@ $black: hsl(0, 0%, 20%);
   margin: 0;
   padding: 0;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+li {
+  list-style: none;
+}
+
+.links {
+  display: flex;
+  gap: 0.5em;
+
+  a::before {
+    content: '[ ';
+  }
+  a::after {
+    content: ' ]';
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: max-content;
+  height: min-content;
+  &.small-gap {
+    gap: 0.7em;
+  }
+  &.normal-gap {
+    gap: 1.5em;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  height: max-content;
+  &.small-gap {
+    gap: 0.7em;
+  }
+  &.normal-gap {
+    gap: 1.5em;
+  }
+  & > .card {
+    width: max-content;
+  }
+}
+
+body {
+  color: $black;
+  background-color: $white;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2em;
+
+  nav ul {
+    display: flex;
+    gap: 1em;
+  }
+
+  h1 a:hover {
+    text-decoration: none;
+  }
+}
+
+.card {
+  padding: 1em;
+  border-radius: 12px;
+  box-shadow: $black 0px 4px 8px;
+  width: 100%;
+}
