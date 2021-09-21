@@ -1,0 +1,17 @@
+<section class="column small-gap">
+  <h2>Create Invitation</h2>
+  <%= form_with(model: @invitation, url: event_invitations_path, class: 'column small-gap') do |form| %>
+    <section>
+      <%= form.label :user_id %>
+      <%= form.collection_select :user_id, User.where.not(id: current_user).all, :id, :username %>
+    </section>
+
+    <section>
+      <%= form.hidden_field :event_id %>
+      <%= form.submit :create %>
+    </section>
+  <% end %>
+  <section class="links">
+    <%= link_to 'back', @invitation.event %>
+  </section>
+</section>

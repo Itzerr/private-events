@@ -20,6 +20,22 @@
   </p>
 
   <p>
+    <strong>Invite Only:</strong>
+    <%= @event.invite_only ? 'yes' : 'no' %>
+  </p>
+
+  <p>
+    <strong>Invited:</strong>
+    <% if @event.invited.size == 0 %>
+      None
+    <% else %>
+      <% @event.invited.each do |user| %>
+        <%= link_to user.username, user_path(user) %>
+      <% end %>
+    <% end %>
+  </p>
+
+  <p>
     <strong>Attendees:</strong>
     <% if @event.attendees.size == 0 %>
       None
@@ -37,7 +53,8 @@
       <% if current_user == @event.creator %>
         <%= link_to 'Edit', edit_event_path(@event) %>
         <%= link_to 'Destroy', @event, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% else %>
+        <%= link_to 'Invite', new_event_invitation_path(event_invitation: { event_id: @event }) %>
+      <% elsif @event.invited.exists?(current_user.id) %>
         <% if current_user.attended_events.exists?(@event.id) %>
           <%= link_to 'Dont Attend', event_attendance_path(id: current_user.event_attendances.find_by(event_id: @event.id).id), method: :delete %>
         <% else %>
